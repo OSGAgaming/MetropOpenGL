@@ -1,0 +1,10 @@
+
+*.vsidx
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.json
+/.vs
+/MetropOpenGL/x64
