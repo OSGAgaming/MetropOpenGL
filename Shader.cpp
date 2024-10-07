@@ -62,6 +62,23 @@ void Shader::Delete() {
 	glDeleteProgram(ID);
 }
 
+void Shader::SetParameterInt(int data, const char* uniform)
+{
+	//std::cout << glGetUniformLocation(ID, uniform) << "\n";
+	std::cout << glGetUniformLocation(ID, "viewProj") << "\n";
+	glUniform1i(glGetUniformLocation(ID, uniform), data);
+}
+
+void Shader::SetParameterFloat(float data, const char* uniform)
+{
+	glUniform1f(glGetUniformLocation(ID, uniform), data);
+}
+
+void Shader::SetParameterDouble(double data, const char* uniform)
+{
+	glUniform1d(glGetUniformLocation(ID, uniform), data);
+}
+
 void Shader::Activate(bool compute, GLuint gX, GLuint gY, GLuint gZ) {
 	if(!compute) glUseProgram(ID);
 	else {
@@ -69,4 +86,12 @@ void Shader::Activate(bool compute, GLuint gX, GLuint gY, GLuint gZ) {
 		glDispatchCompute(gX, gY, gZ);
 		glMemoryBarrier(GL_ALL_BARRIER_BITS);
 	}
+}
+
+void Shader::DeleteSSBOs() {
+	for (auto& buffer : SSBOBuffers) {
+		if(glIsBuffer(buffer)) glDeleteBuffers(1, &buffer);
+	}
+
+	SSBOBuffers.clear();
 }

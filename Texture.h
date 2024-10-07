@@ -12,7 +12,7 @@ public:
 	GLuint ID;
 	GLenum type;
 	Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType);
-	Texture(GLenum texType, GLuint width, GLuint height, GLenum slot);
+	Texture(GLenum texType, GLuint width, GLuint height, GLenum slot, GLuint binding, GLenum access = GL_WRITE_ONLY);
 
 	// Assigns a texture unit to a texture
 	void texUnit(Shader& shader, const char* uniform, GLuint unit);

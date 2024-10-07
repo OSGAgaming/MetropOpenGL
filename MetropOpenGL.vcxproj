@@ -137,9 +137,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ComputeStructures.cpp" />
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RayScene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -148,8 +151,12 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="ComputeStructures.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="default.frag" />
+    <ClInclude Include="RayScene.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />

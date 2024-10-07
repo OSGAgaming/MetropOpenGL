@@ -27,7 +27,7 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	glBindTexture(texType, 0);
 }
 
-Texture::Texture(GLenum texType, GLuint width, GLuint height, GLenum slot)
+Texture::Texture(GLenum texType, GLuint width, GLuint height, GLenum slot, GLuint binding, GLenum access)
 {
 	type = texType;
 
@@ -42,7 +42,7 @@ Texture::Texture(GLenum texType, GLuint width, GLuint height, GLenum slot)
 	glTexParameteri(ID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	glTextureStorage2D(ID, 1, GL_RGBA32F, width, height);
-	glBindImageTexture(0, ID, 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA32F);
+	glBindImageTexture(binding, ID, 0, GL_FALSE, 0, access, GL_RGBA32F);
 }
 
 void Texture::texUnit(Shader& shader, const char* uniform, GLuint unit)
