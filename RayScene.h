@@ -5,11 +5,13 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Model.h"
+#include "ASSIMP.cpp"
 
 class RayScene : public Scene {
 public:
-    const unsigned int SCREEN_WIDTH = 1024;
-    const unsigned int SCREEN_HEIGHT = 1024;
+    unsigned int SCREEN_WIDTH = 1024;
+    unsigned int SCREEN_HEIGHT = 1024;
 
     Shader computeShader;
     Shader shader;
@@ -19,6 +21,7 @@ public:
     Texture averageTex;
 
     Camera camera;
+    ASSModel model;
 
     VAO SceneVAO;
     std::unique_ptr<VBO> SceneVBO;
@@ -27,10 +30,11 @@ public:
     int Frame = 0;
 
     void AddSurfaces();
+    void AddMeshes();
 
     void OnBufferSwap(Window& win) override;
     void OnWindowLoad(Window& win) override;
     void OnWindowClose(Window& win) override;
 
-    RayScene();
+    RayScene(Window& win);
 };

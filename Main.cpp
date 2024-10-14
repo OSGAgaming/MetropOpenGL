@@ -17,8 +17,8 @@
 
 int main() 
 {
-	Window win("Metropolis", 800, 800);
-	RayScene scene;
+	Window win("Metropolis", 1400, 800);
+	RayScene scene(win);
 
 	scene.OnWindowLoad(win);
 

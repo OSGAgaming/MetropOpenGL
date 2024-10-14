@@ -64,14 +64,18 @@ void Shader::Delete() {
 
 void Shader::SetParameterInt(int data, const char* uniform)
 {
-	//std::cout << glGetUniformLocation(ID, uniform) << "\n";
-	std::cout << glGetUniformLocation(ID, "viewProj") << "\n";
 	glUniform1i(glGetUniformLocation(ID, uniform), data);
 }
 
 void Shader::SetParameterFloat(float data, const char* uniform)
 {
 	glUniform1f(glGetUniformLocation(ID, uniform), data);
+}
+
+void Shader::SetParameterColor(glm::vec3 data, const char* uniform)
+{
+
+	glUniform3f(glGetUniformLocation(ID, uniform), data.x, data.y, data.z);
 }
 
 void Shader::SetParameterDouble(double data, const char* uniform)
@@ -86,6 +90,12 @@ void Shader::Activate(bool compute, GLuint gX, GLuint gY, GLuint gZ) {
 		glDispatchCompute(gX, gY, gZ);
 		glMemoryBarrier(GL_ALL_BARRIER_BITS);
 	}
+}
+
+void Shader::Dispatch(GLuint gX, GLuint gY, GLuint gZ) {
+
+	glDispatchCompute(gX, gY, gZ);
+	glMemoryBarrier(GL_ALL_BARRIER_BITS);
 }
 
 void Shader::DeleteSSBOs() {

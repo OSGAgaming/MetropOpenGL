@@ -7,8 +7,9 @@
 #include<sstream>
 #include<iostream>
 #include<cerrno>
-#include <vector>
-#include <unordered_map>
+#include<vector>
+#include<unordered_map>
+#include<glm/glm.hpp>
 
 std::string get_file_contents(const char* filename);
 
@@ -21,6 +22,8 @@ public:
 	Shader(const char* computeFile);
 
 	void Activate(bool compute = false, GLuint gX = 0, GLuint gY = 0, GLuint gZ = 0);
+	void Dispatch(GLuint gX = 0, GLuint gY = 0, GLuint gZ = 0);
+
 	void Delete();
 	template <class T>
 	GLuint StoreSSBO(std::vector<T> data, int binding);
@@ -32,6 +35,7 @@ public:
 	void SetParameterInt(int data, const char* uniform);
 	void SetParameterFloat(float data, const char* uniform);
 	void SetParameterDouble(double data, const char* uniform);
+	void SetParameterColor(glm::vec3 data, const char* uniform);
 	void DeleteSSBOs();
 };
 
