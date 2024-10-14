@@ -83,6 +83,7 @@ uniform vec3 GroundColor;
 
 uniform float SunFocus;
 uniform float SunIntensity;
+uniform float SunThreshold;
 
 uniform mat4 viewProj;
 
@@ -283,7 +284,7 @@ vec3 RandomDirection(inout vec2 state){
 vec3 GetAmbientLight(Ray ray){
     float gradient = pow(smoothstep(0.0f,0.4f,float(ray.direction.y)), 0.35f);
     vec3 gradientC = mix(SkyColourHorizon, SkyColourZenith, gradient);
-    float sun = pow(max(0, dot(ray.direction, -SunLightDirection) - 0.5f), SunFocus) * SunIntensity;
+    float sun = pow(max(0, dot(ray.direction, -SunLightDirection) - SunThreshold), SunFocus) * SunIntensity;
 
     float groundToSkyT = smoothstep(-0.01f,0.0f,float(ray.direction.y));
     float sunMask = groundToSkyT >= 1 ? 1 : 0;

@@ -147,11 +147,12 @@
 
         computeShader.SetParameterColor(glm::vec3(0.1f, 0.2f, 0.5f), "SkyColourHorizon");
         computeShader.SetParameterColor(glm::vec3(0, 0.1f, 0.3f), "SkyColourZenith");
-        computeShader.SetParameterColor(glm::vec3(0.0f, -2.0f, -1.0f), "SunLightDirection");
+        computeShader.SetParameterColor(glm::vec3(0.0f, -1.5f, -1.0f), "SunLightDirection");
         computeShader.SetParameterColor(glm::vec3(0.1f, 0.1f, 0.1f), "GroundColor");
 
         computeShader.SetParameterFloat(10.0f, "SunFocus");
-        computeShader.SetParameterFloat(0.004f, "SunIntensity");
+        computeShader.SetParameterFloat(0.01f, "SunIntensity");
+        computeShader.SetParameterFloat(0.3f, "SunThreshold");
 
         computeShader.Dispatch(SCREEN_WIDTH / 8, SCREEN_HEIGHT / 8, 1);
 
