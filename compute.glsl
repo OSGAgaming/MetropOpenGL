@@ -87,6 +87,9 @@ uniform float SunThreshold;
 
 uniform mat4 viewProj;
 
+uniform int NumberOfBounces = 4;
+uniform int NumberOfRays = 5;
+
 highp float rand(inout vec2 co)
 {
     highp float a = 12.9898;
@@ -296,7 +299,6 @@ vec3 RandomDirectionHemsiphere(vec3 normal, inout vec2 state){
     return dir * sign(dot(dir,normal));
 }
 
-const int NumberOfBounces = 4;
 vec3 FullTrace(Ray ray, inout vec2 state){
     vec3 rayColor = vec3(1,1,1);
     vec3 rayLight = vec3(0,0,0);
@@ -363,16 +365,15 @@ void main() {
 
     // Perform path tracing
     vec2 state = vec2(u + Frame * 0.09201489f, v + Frame * 0.06101789f);
-    float numOfRays = 5;
     vec3 color = vec3(0,0,0);
-    for(int i = 0; i < numOfRays; i++){
+    for(int i = 0; i < NumberOfRays; i++){
      Ray ray;
      ray.origin = camera.position;
      ray.direction = rayDir;
 
      color += FullTrace(ray, state);
     }
-    color /= numOfRays; 
+    color /= float(NumberOfRays); 
 
     // Output to image
     vec3 pixel = clamp(color, 0, 1);

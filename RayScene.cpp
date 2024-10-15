@@ -26,7 +26,7 @@
                 std::vector<glm::vec3> normals = {};
 
                 for (int b = 0; b < mesh.vert_indices.size(); b++) {
-                    positions.push_back(mesh.vert_positions[mesh.vert_indices[b]] * 10.0f + glm::vec3(0,0,15));
+                    positions.push_back(mesh.vert_positions[mesh.vert_indices[b]] * 10.0f + glm::vec3(0,0,16));
                     normals.push_back(mesh.vert_normals[mesh.vert_indices[b]]);
                     if ((b + 1) % 3 == 0) {
                         Triangle triangle;
@@ -73,7 +73,7 @@
             Material material;
 
             material.emmisionColor = glm::vec3(1.0f, 1.0f, 1.0f);
-            material.emmisionStrength = (i == floor(noOfCircles / 2)) ? glm::vec3(4, 4, 4) : glm::vec3(0, 0, 0);
+            material.emmisionStrength = (i == floor(noOfCircles / 2)) ? glm::vec3(1, 1, 1) : glm::vec3(0, 0, 0);
             material.diffuseColor = (i == 0) ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(1.0f, 1 - i / noOfCircles, 1 - i / noOfCircles);
             material.smoothness = glm::vec3(i / noOfCircles,0,0);
             material.specularChance = glm::vec3((i * 0.2f) / noOfCircles, 0, 0);
@@ -81,8 +81,8 @@
 
             circle.material = material;
             circle.position = (i == floor(noOfCircles / 2)) ? 
-                glm::vec3(i * 2.4f - noOfCircles * 0.5f * 2.4f, 1.0f, 5.0f) :
-                glm::vec3(i * 2.4f - noOfCircles * 0.5f * 2.4f, 0, 5.0f);
+                glm::vec3(i * 2.4f - noOfCircles * 0.5f * 2.4f, 1.0f, 7.0f) :
+                glm::vec3(i * 2.4f - noOfCircles * 0.5f * 2.4f, 0, 7.0f);
             circle.radius = 1.0f;
             circles.push_back(circle);
         }
@@ -96,7 +96,7 @@
         material.specularChance = glm::vec3(0.2f, 0, 0);
         material.smoothness = glm::vec3(0.7, 0, 0);
         circle.material = material;
-        circle.position = glm::vec3(0, -11.0f, 11.0f);
+        circle.position = glm::vec3(0, -10.0f, 11.0f);
         circle.radius = 10.0f;
         circles.push_back(circle);
 
@@ -147,12 +147,15 @@
 
         computeShader.SetParameterColor(glm::vec3(0.1f, 0.2f, 0.5f), "SkyColourHorizon");
         computeShader.SetParameterColor(glm::vec3(0, 0.1f, 0.3f), "SkyColourZenith");
-        computeShader.SetParameterColor(glm::vec3(0.0f, -1.5f, -1.0f), "SunLightDirection");
+        computeShader.SetParameterColor(glm::normalize(glm::vec3(1.0f, -0.5f, -1.0f)), "SunLightDirection");
         computeShader.SetParameterColor(glm::vec3(0.1f, 0.1f, 0.1f), "GroundColor");
 
-        computeShader.SetParameterFloat(10.0f, "SunFocus");
-        computeShader.SetParameterFloat(0.01f, "SunIntensity");
-        computeShader.SetParameterFloat(0.3f, "SunThreshold");
+        computeShader.SetParameterFloat(55.0f, "SunFocus");
+        computeShader.SetParameterFloat(2.0f, "SunIntensity");
+        computeShader.SetParameterFloat(0.0f, "SunThreshold");
+
+        computeShader.SetParameterInt(4, "NumberOfBounces");
+        computeShader.SetParameterInt(3, "NumberOfRays");
 
         computeShader.Dispatch(SCREEN_WIDTH / 8, SCREEN_HEIGHT / 8, 1);
 
